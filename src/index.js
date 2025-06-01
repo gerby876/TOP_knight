@@ -28,12 +28,12 @@ knightMoves = function (start, end) {
   let solution = [];
   moves(current, legalmoves, path, end, solution);
 
-  for (let x = 0; x < solution.length - 1; x++) {
-    if (solution[solution.length - 1].length < solution[x].length) {
-      solution.splice(x, 1);
-      x--;
-    }
-  }
+  // for (let x = 0; x < solution.length - 1; x++) {
+  //   if (solution[solution.length - 1].length < solution[x].length) {
+  //     solution.splice(x, 1);
+  //     x--;
+  //   }
+  // }
 
   if (solution.length > 1) {
     console.log(
@@ -86,7 +86,12 @@ moves = function (current, legalmoves, path, end, solution) {
       current = [current[0] + legalmoves[y][0], current[1] + legalmoves[y][1]];
       path.push(current);
       let tmp = path.slice();
+      if (solution.length > 0 && tmp.length < solution[0].length) {
+        // solution = [];
+        solution.length = 0;
+      }
       solution.push(tmp);
+      // console.log(solution);
       path.pop();
       return solution;
     }
@@ -127,4 +132,4 @@ checkpath = function (path, array) {
   return false;
 };
 
-knightMoves([0, 0], [2, 2]);
+knightMoves([0, 0], [3, 2]);
